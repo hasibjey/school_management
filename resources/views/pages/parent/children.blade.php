@@ -35,7 +35,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($student->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
+                                        <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($student->Student->User->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ class MyController extends Controller
 
     public function children()
     {
-        $student = User::with(['Student.guardian_info'])->find(Auth::id());
+        $student = User::with(['Student.User', 'Student.guardian_info'])->find(Auth::id());
 
         return view('pages.parent.children', compact('student'));
     }

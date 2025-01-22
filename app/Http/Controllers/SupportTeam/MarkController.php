@@ -59,9 +59,9 @@ class MarkController extends Controller
     public function show($student_id, $year)
     {
         /* Prevent Other Students/Parents from viewing Result of others */
-        if(Auth::user()->id != $student_id && !Qs::userIsTeamSAT() && !Qs::userIsMyChild($student_id, Auth::user()->id)){
-            return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
-        }
+        // if(Auth::user()->id != $student_id && !Qs::userIsTeamSAT() && !Qs::userIsMyChild($student_id, Auth::user()->id)){
+        //     return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
+        // }
 
         if(Mk::examIsLocked() && !Qs::userIsTeamSA()){
             Session::put('marks_url', route('marks.show', [Qs::hash($student_id), $year]));
