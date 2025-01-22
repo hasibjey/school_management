@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\MyParent;
 use App\Http\Controllers\Controller;
+use App\Models\GuardianInfo;
 use App\Repositories\StudentRepo;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class MyController extends Controller
@@ -15,9 +17,9 @@ class MyController extends Controller
 
     public function children()
     {
-        $data['students'] = $this->student->getRecord(['my_parent_id' => Auth::user()->id])->with(['my_class', 'section'])->get();
+        $student = User::with(['Student.guardian_info'])->find(Auth::id());
 
-        return view('pages.parent.children', $data);
+        return view('pages.parent.children', compact('student'));
     }
 
 }

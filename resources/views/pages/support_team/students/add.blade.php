@@ -16,7 +16,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Full Name: <span class="text-danger">*</span></label>
-                                <input value="{{ old('name') }}" type="text" name="name" placeholder="Full Name" class="form-control">
+                                <input oninput="makeEmail(event)" value="{{ old('name') }}" type="text" name="name" placeholder="Full Name" class="form-control">
                                 </div>
                             </div>
 
@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Email address: </label>
-                                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email Address">
+                                <input type="email" value="{{ old('email') }}" name="email" class="form-control email" placeholder="Email Address" readonly>
                             </div>
                         </div>
 
@@ -160,18 +160,6 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_parent_id">Parent: </label>
-                                <select data-placeholder="Choose..."  name="my_parent_id" id="my_parent_id" class="select-search form-control">
-                                    <option  value=""></option>
-                                    @foreach($parents as $p)
-                                        <option {{ (old('my_parent_id') == Qs::hash($p->id)) ? 'selected' : '' }} value="{{ Qs::hash($p->id) }}">{{ $p->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label for="year_admitted">Year Admitted: <span class="text-danger">*</span></label>
                                 <select data-placeholder="Choose..." name="year_admitted" id="year_admitted" class="select-search form-control">
                                     <option value=""></option>
@@ -187,13 +175,14 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="my_class_id">Father's Name: <span class="text-danger">*</span></label>
-                                <input type="text" name="father_name" placeholder="Father's Name" class="form-control" value="{{ old('FatherName') }}">
+                                <input type="text" oninput="makeEmail(event)" name="father_name" placeholder="Father's Name" class="form-control father" value="{{ old('father_name') }}">
+                                <span class="text-success guardian_email d-none"></span>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="my_class_id">Mother's Name: <span class="text-danger">*</span></label>
-                                <input type="text" name="mother_name" placeholder="Mother's Name" class="form-control" value="{{ old('mather_name') }}">
+                                <input type="text" name="mother_name" placeholder="Mother's Name" class="form-control" value="{{ old('mother_name') }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -247,4 +236,28 @@
 
             </form>
         </div>
+
+        <script>
+            const makeEmail = (e) => {
+                const input = e.target.getAttribute('name');
+                const name = e.target.value;
+                const firstName = name.split(' ')[0];
+                const email = firstName.toLowerCase() + '@ssms.com';
+
+                if(input == 'father_name') {
+                    document.querySelector('.guardian_email').classList.remove('d-none');
+                    document.querySelector('.guardian_email').innerText = email;
+                    if(name.length < 1) {
+                        document.querySelector('.guardian_email').classList.add('d-none');
+                    }
+                }
+                else {
+                    document.querySelector('.email').value = email;
+                    if(name.length < 1) {
+                        document.querySelector('.email').value = '';
+                    }
+                }
+
+            }
+        </script>
     @endsection

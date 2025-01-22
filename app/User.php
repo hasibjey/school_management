@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BloodGroup;
+use App\Models\GuardianInfo;
 use App\Models\Lga;
 use App\Models\Nationality;
 use App\Models\StaffRecord;
@@ -11,6 +12,7 @@ use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -23,7 +25,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'phone', 'phone2', 'dob', 'gender', 'photo', 'address', 'bg_id', 'password', 'nal_id', 'division_id', 'district_id', 'upazila_id', 'code', 'user_type', 'email_verified_at'
+        'name', 'username', 'email', 'phone', 'phone2', 'dob', 'gender', 'photo', 'address', 'bg_id', 'password', 'nal_id', 'division_id', 'district_id', 'upazila_id', 'code', 'user_type', 'email_verified_at',
+        'student_id'
     ];
 
     /**
@@ -40,16 +43,6 @@ class User extends Authenticatable
         return $this->hasOne(StudentRecord::class);
     }
 
-    public function lga()
-    {
-        return $this->belongsTo(Lga::class);
-    }
-
-    public function state()
-    {
-        return $this->belongsTo(State::class);
-    }
-
     public function nationality()
     {
         return $this->belongsTo(Nationality::class, 'nal_id');
@@ -63,5 +56,10 @@ class User extends Authenticatable
     public function staff()
     {
         return $this->hasMany(StaffRecord::class);
+    }
+
+    public function Student(): BelongsTo
+    {
+        return $this->belongsTo(StudentRecord::class, 'student_id');
     }
 }

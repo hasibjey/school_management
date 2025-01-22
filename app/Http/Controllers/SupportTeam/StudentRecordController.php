@@ -112,6 +112,7 @@ class StudentRecordController extends Controller
         $gu['division_id'] = $req->division_id;
         $gu['district_id'] = $req->district_id;
         $gu['upazila_id'] = $req->upazila_id;
+        $gu['student_id'] = $student->id;
         $this->user->create($gu); // Create Parent
 
 
