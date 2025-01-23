@@ -153,6 +153,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('get_upazila/{state_id}', 'AjaxController@get_upazila')->name('get_upazila');
         Route::get('get_class_sections/{class_id}', 'AjaxController@get_class_sections')->name('get_class_sections');
         Route::get('get_class_subjects/{class_id}', 'AjaxController@get_class_subjects')->name('get_class_subjects');
+        Route::get('get_subjects/{class_id}', 'AjaxController@get_subjects')->name('get_subjects');
     });
 
 });
@@ -171,3 +172,16 @@ Route::group(['namespace' => 'MyParent','middleware' => 'my_parent',], function(
     Route::get('/my_children', 'MyController@children')->name('my_children');
 
 });
+
+/************************ Admin Exam Routing ****************************/
+Route::group(['prefix' => 'admin/exam'], function(){
+    Route::get('/exams/routing', 'ExamRoutingController@index')->name('admin.exams.routing.index');
+    Route::post('/exams/routing/store', 'ExamRoutingController@store')->name('admin.exams.routing.store');
+    Route::get('/exams/routing/edit', 'ExamRoutingController@edit')->name('admin.exams.routing.edit');
+    Route::post('/exams/routing/update', 'ExamRoutingController@update')->name('admin.exams.routing.update');
+    Route::get('/exams/routing/delete', 'ExamRoutingController@trash')->name('admin.exams.routing.delete');
+});
+
+
+/************************ Admin Exam Routing ****************************/
+Route::get('student/exams/routing', 'ExamRoutingController@routing')->name('student.exams.routing.index');

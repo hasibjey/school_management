@@ -60,6 +60,6 @@ class User extends Authenticatable
 
     public function Student(): BelongsTo
     {
-        return $this->belongsTo(StudentRecord::class, 'student_id');
+        return $this->belongsTo(StudentRecord::class);
     }
 }
