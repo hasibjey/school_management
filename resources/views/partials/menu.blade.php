@@ -55,12 +55,24 @@
 
                 <!-- Student exam routing -->
                 @if (!Qs::userIsAdministrative() && !Qs::userIsTeamSAT())
-                <li class="nav-item">
-                    <a href="{{ route('student.exams.routing.index') }}" class="nav-link {{ Route::is('student.exams.routing.index') ? 'active' : '' }}">
-                        <i class="icon-books"></i>
-                        <span>Exam Routing</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student.exams.routing.index') }}"
+                            class="nav-link {{ Route::is('student.exams.routing.index') ? 'active' : '' }}">
+                            <i class="icon-books"></i>
+                            <span>Exam Routing</span>
+                        </a>
+                    </li>
+                @endif
+
+                <!-- Student class routing -->
+                @if (!Qs::userIsAdministrative() && !Qs::userIsTeamSAT())
+                    <li class="nav-item">
+                        <a href="{{ route('student.class.routing.index') }}"
+                            class="nav-link {{ Route::is('student.class.routing.index') ? 'active' : '' }}">
+                            <i class="icon-windows2"></i>
+                            <span>Class Routing</span>
+                        </a>
+                    </li>
                 @endif
 
                 {{-- Academics --}}
@@ -181,10 +193,23 @@
                     </li>
 
                     {{-- Manage Classes --}}
-                    <li class="nav-item">
-                        <a href="{{ route('classes.index') }}"
-                            class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index', 'classes.edit']) ? 'active' : '' }}"><i
-                                class="icon-windows2"></i> <span> Classes</span></a>
+                    <li
+                        class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['classes.index', 'classes.edit', 'admin.class.routing.index']) ? 'nav-item-expanded nav-item-open' : '' }} ">
+                        <a href="#" class="nav-link"><i class="icon-windows2"></i> <span> Classes</span></a>
+
+                        <ul class="nav nav-group-sub" data-submenu-title="Manage Exams">
+                            <!-- Class list -->
+                            <li class="nav-item">
+                                <a href="{{ route('classes.index') }}"
+                                    class="nav-link {{ Route::is('classes.index') ? 'active' : '' }}">Classes List</a>
+                            </li>
+                            <!-- Class routing -->
+                            <li class="nav-item">
+                                <a href="{{ route('admin.class.routing.index') }}"
+                                    class="nav-link {{ Route::is('admin.class.routing.index') ? 'active' : '' }}">Classes Routing</a>
+                            </li>
+
+                        </ul>
                     </li>
 
                     {{-- Manage Dorms --}}
@@ -227,7 +252,8 @@
                                 <!-- Exam Routing -->
                                 <li class="nav-item">
                                     <a href="{{ route('admin.exams.routing.index') }}"
-                                        class="nav-link {{ Route::is('admin.exams.routing.index') ? 'active' : '' }}">Exam Routing</a>
+                                        class="nav-link {{ Route::is('admin.exams.routing.index') ? 'active' : '' }}">Exam
+                                        Routing</a>
                                 </li>
 
                                 {{-- Grades list --}}

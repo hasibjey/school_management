@@ -63,7 +63,7 @@ class ExamRoutingController extends Controller
             'exam_date' => Carbon::createFromFormat('m/d/Y', $request->exam_date)->format('Y-m-d'),
             'exam_time' => $request->exam_time,
         ]);
-        return redirect()->back()->with('success', 'Exam routing updated successfully');
+        return redirect()->route('admin.exams.routing.index')->with('success', 'Exam routing updated successfully');
     }
 
     public function trash(Request $request)

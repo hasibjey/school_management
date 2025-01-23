@@ -182,6 +182,16 @@ Route::group(['prefix' => 'admin/exam'], function(){
     Route::get('/exams/routing/delete', 'ExamRoutingController@trash')->name('admin.exams.routing.delete');
 });
 
-
-/************************ Admin Exam Routing ****************************/
+/************************ Student Exam Routing ****************************/
 Route::get('student/exams/routing', 'ExamRoutingController@routing')->name('student.exams.routing.index');
+
+/************************ Admin Class Routing ****************************/
+Route::group(['prefix' => 'admin/class'], function(){
+    Route::get('/class/routing', 'ClassRoutingController@index')->name('admin.class.routing.index');
+    Route::post('/class/routing/store', 'ClassRoutingController@store')->name('admin.class.routing.store');
+    Route::get('/class/routing/edit', 'ClassRoutingController@edit')->name('admin.class.routing.edit');
+    Route::post('/class/routing/update', 'ClassRoutingController@update')->name('admin.class.routing.update');
+    Route::get('/class/routing/delete', 'ClassRoutingController@trash')->name('admin.class.routing.delete');
+});
+/************************ Student Class Routing ****************************/
+Route::get('student/class/routing', 'ClassRoutingController@routing')->name('student.class.routing.index');
